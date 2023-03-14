@@ -24,7 +24,14 @@
   
   //Determines if tweet should be updated or inserted new
   async function submit() {
-    let { id, content } = await api.insert(input.value, true)
+    let id, content = "";
+    if(localStore.id != "") {
+      ({ id, content } = await api.update(input.value, localStore.id));
+    }
+    else {
+      let morning = new Date().getHours() < 11;
+      ({ id, content } = await api.insert(input.value, morning));
+    }
     localStore.save(content, id);
   }
 

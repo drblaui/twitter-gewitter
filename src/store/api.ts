@@ -30,6 +30,19 @@ export const useAPIStore = defineStore({
 			else {
 				return { id: "", content: ""};
 			}
+		},
+		async update(tweet: string, id: string): Promise<Record> {
+			const { data, error } = await supabase.from("twitter-gewitter").update({
+				tweet: tweet
+			})
+			.eq("id", id)
+			.select();
+			if(data && !error) {
+				return { id: data[0].id, content: data[0].tweet };
+			}
+			else {
+				return { id: "", content: ""};
+			}
 		}
 	}
 })
