@@ -35,5 +35,4 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  base: "/tutorien/adi23/twitter-gewitter/"
 })

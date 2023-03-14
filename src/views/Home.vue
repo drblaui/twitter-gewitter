@@ -1,25 +1,32 @@
 <script lang="ts" setup>
   import { ref } from "vue";
   import { useLocalStore } from "@/store/local"
+  import { useAPIStore } from "@/store/api";
 
+  //Shows error
   const maxChars = [
     (v: string) => v.length <= 240 || "Maximal 240 Zeichen!!"
   ]
+
+  //Stores 
   const localStore = useLocalStore();
+  const api = useAPIStore();
+
+  //Models
   let input = ref(localStore.tweet);
 
+  //Enforces 240 Char Rule
   function check() {
     if(input.value.length > 240) {
       input.value = input.value.substring(0,240);
     }
   }
-
-  function submit() {
-    localStore.save(input.value);
-    console.log(input.value);
-    console.log(localStore.tweet)
+  
+  //Determines if tweet should be updated or inserted new
+  async function submit() {
+    let { id, content } = await api.insert(input.value, true)
+    localStore.save(content, id);
   }
-  console.log(localStore.tweet)
 
 </script>
 <template>
@@ -35,7 +42,7 @@
       </v-col>
     </v-row>
     <v-row justify="center">
-      <v-col align="center" justify="center" cols="3">
+      <v-col align="center" justify="center" cols="auto">
         <v-textarea
           counter
           label="Deine Gedanken"
