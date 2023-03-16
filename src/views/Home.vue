@@ -49,7 +49,7 @@
       </v-col>
     </v-row>
     <v-row justify="center">
-      <v-col align="center" justify="center" cols="3">
+      <v-col align="center" justify="center" cols="auto">
         <v-textarea
           counter
           label="Deine Gedanken"
