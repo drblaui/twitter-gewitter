@@ -10,6 +10,7 @@ export const useLocalStore = defineStore('local', {
 	actions: {
 		save(text: string, id: string) {
 			this.tweet = text;
+			this.id = id;
 			let locStore = {
 				id: id, 
 				content: text 

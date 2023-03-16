@@ -29,8 +29,8 @@
       ({ id, content } = await api.update(input.value, localStore.id));
     }
     else {
-      let morning = new Date().getHours() < 11;
-      ({ id, content } = await api.insert(input.value, morning));
+      let evening = new Date().getHours() > 11;
+      ({ id, content } = await api.insert(input.value, evening));
     }
     localStore.save(content, id);
   }
@@ -45,11 +45,11 @@
     </v-row>
     <v-row>
       <v-col align="center" class="text-h6">
-        Ich würde dir die Veranstaltung Auswirkungen der Informatik empfehlen, wenn du...
+        Ich würde dir die Veranstaltung Auswirkungen der Informatik empfehlen, weil...
       </v-col>
     </v-row>
     <v-row justify="center">
-      <v-col align="center" justify="center" cols="auto">
+      <v-col align="center" justify="center" cols="3">
         <v-textarea
           counter
           label="Deine Gedanken"

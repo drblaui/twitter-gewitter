@@ -43,6 +43,16 @@ export const useAPIStore = defineStore({
 			else {
 				return { id: "", content: ""};
 			}
+		},
+		async getAll(tutorium: boolean) {
+			const { data, error } = await supabase.from("twitter-gewitter").select().eq('tutorium', tutorium);
+			if(!error) {
+				return data;
+			}
+			return [];
+		},
+		getSupabaseObject() {
+			return supabase; 
 		}
 	}
 })

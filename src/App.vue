@@ -4,7 +4,7 @@
   <v-app>
     <v-main>
       <Suspense>
-        <router-view />
+        <router-view :key="$route.fullPath" />
       </Suspense>
     </v-main>
   </v-app>
