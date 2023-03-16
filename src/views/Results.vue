@@ -2,6 +2,7 @@
 	import { useRoute } from 'vue-router';
 	import { ref } from 'vue';
 	import { useAPIStore } from '@/store/api';
+import { platform } from 'os';
 
 	const supabaseStore = useAPIStore();
 	const supabase = supabaseStore.getSupabaseObject();
@@ -16,7 +17,9 @@
     'postgres_changes',
     { event: '*', schema: 'public', table: 'twitter-gewitter', filter: `tutorium=eq.${result}`},
     (payload) => {
-			tweets.value[payload.new.id] = payload.new;
+			if("id" in payload.new) {
+				tweets.value[payload.new.id] = payload.new;
+			}
     }
   )
   .subscribe()
